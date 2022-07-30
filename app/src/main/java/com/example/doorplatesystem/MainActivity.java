@@ -183,15 +183,16 @@ public class MainActivity extends AppCompatActivity {
         };
         webView.setWebViewClient(webViewClient);
         webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+        webView.setWebContentsDebuggingEnabled(true);
         webSettings.setMediaPlaybackRequiresUserGesture(false);
 
         //设置js接口
         MediaCommunication mediaCommunication = new MediaCommunication(this);
-        webView.addJavascriptInterface(mediaCommunication, "AndroidWebRTC");
+            webView.addJavascriptInterface(mediaCommunication, "AndroidWebRTC");
 
         //屏幕共享
         webRTC = WebRTC.get();
-        webRTC.init(context);
+        webRTC.init(this);
         webRTC.getScreenSourceData();
 
 
@@ -217,25 +218,6 @@ public class MainActivity extends AppCompatActivity {
             Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS
     };
 
-    /**
-     * 检测应用是否存在
-     *
-     * @param context
-     * @param packageName
-     * @return
-     */
-    public static boolean isApkInstalled(Context context, String packageName) {
-        if (TextUtils.isEmpty(packageName)) {
-            return false;
-        }
-        try {
-            ApplicationInfo info = context.getPackageManager().getApplicationInfo(packageName, PackageManager.GET_UNINSTALLED_PACKAGES);
-            return true;
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
 
     public static void startInit() {
         webView.post(new Runnable() {
@@ -249,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
 //                  url = "https://webrtccommunication.ppamatrix.com:1447/tool/webrtc/index.html?deviceId=test0";
 //                    url = "https://webrtccommunication.ppamatrix.com:1447";
                 url = "https://webrtccommunication.ppamatrix.com:1447/rtc/doorplate.html";
-                url = String.format("https://webrtccommunication.ppamatrix.com:1447/rtc/doorplate.html?macAddress=%s&state=%s&deviceId=%s", macAddress, state, doorplateId);
+//                url = String.format("https://webrtccommunication.ppamatrix.com:1447/rtc/doorplate.html?macAddress=%s&state=%s&deviceId=%s", macAddress, state, doorplateId);
                 webView.loadUrl(url);
             }
         });
