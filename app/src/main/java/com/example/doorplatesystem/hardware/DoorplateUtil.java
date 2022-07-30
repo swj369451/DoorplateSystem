@@ -5,6 +5,7 @@ import android.os.Looper;
 import android.widget.Toast;
 
 import com.example.doorplatesystem.MainActivity;
+import com.example.doorplatesystem.webrtc.MediaCommunication;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -79,6 +80,9 @@ public class DoorplateUtil {
 						public void run() {
 							Looper.prepare();
 							Toast.makeText(context, "设备id获取成功，id为："+deviceId, Toast.LENGTH_LONG).show();
+							MediaCommunication mediaCommunication = new MediaCommunication(context);
+							mediaCommunication.init(deviceId);
+
 							Looper.loop();
 						}
 					}.start();
