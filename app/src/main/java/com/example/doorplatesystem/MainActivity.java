@@ -196,6 +196,13 @@ public class MainActivity extends AppCompatActivity {
         webRTC.getScreenSourceData();
 
 
+
+        Intent frontIntent = new Intent(this, MainActivity.class);
+        frontIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+        frontIntent.setAction(Intent.ACTION_MAIN);
+        frontIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+
+
     }
 
     //权限
@@ -230,7 +237,7 @@ public class MainActivity extends AppCompatActivity {
 //                  url="https://webrtccommunication.ppamatrix.com:1447/testrtc/index.html";
 //                  url = "https://webrtccommunication.ppamatrix.com:1447/tool/webrtc/index.html?deviceId=test0";
 //                    url = "https://webrtccommunication.ppamatrix.com:1447";
-                url = "https://webrtccommunication.ppamatrix.com:1447/rtc/doorplate.html";
+//                url = "https://webrtccommunication.ppamatrix.com:1447/rtc/doorplate.html";
 //                url = String.format("https://webrtccommunication.ppamatrix.com:1447/rtc/doorplate.html?macAddress=%s&state=%s&deviceId=%s", macAddress, state, doorplateId);
                 webView.loadUrl(url);
             }
